@@ -1,0 +1,11 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NeuroDirect icon">
+  <rect width="512" height="512" rx="116" fill="#061A35"/>
+  <rect x="18" y="18" width="476" height="476" rx="100" stroke="#C9A35C" stroke-width="8" opacity=".9"/>
+  <path d="M171 120c-45 0-74 31-74 74-35 16-52 47-52 88 0 45 29 80 70 93 11 43 47 70 92 70 38 0 70-20 88-52 18 32 50 52 89 52 47 0 83-31 94-76 34-17 54-49 54-90s-20-73-54-90c-11-45-47-76-94-76-36 0-67 19-86 48-18-28-49-41-87-41Z" transform="scale(.76) translate(70 40)" stroke="url(#g)" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M256 155v205" stroke="#FFFFFF" stroke-width="21" stroke-linecap="round"/>
+  <path d="M144 256h224" stroke="#C9A35C" stroke-width="23" stroke-linecap="round"/>
+  <path d="M315 206l51 50-51 50" stroke="#C9A35C" stroke-width="23" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="159" cy="207" r="23" fill="#061A35" stroke="#F7E6C3" stroke-width="17"/>
+  <circle cx="178" cy="329" r="23" fill="#061A35" stroke="#F7E6C3" stroke-width="17"/>
+  <defs><linearGradient id="g" x1="80" y1="90" x2="445" y2="430" gradientUnits="userSpaceOnUse"><stop stop-color="#F7E6C3"/><stop offset=".42" stop-color="#13B8AA"/><stop offset="1" stop-color="#C9A35C"/></linearGradient></defs>
+</svg>
