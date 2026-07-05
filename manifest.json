@@ -1,7 +1,7 @@
 {
   "name": "NeuroDirect Teen",
   "short_name": "NeuroDirect",
-  "description": "A premium teen wellbeing, planner and parent-support app for ages 13-17.",
+  "description": "A premium teen wellbeing, planner and parent-support app for ages 13-17 with light and dark modes.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

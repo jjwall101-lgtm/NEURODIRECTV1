@@ -1,8 +1,8 @@
-# NeuroDirect Teen App
+# NeuroDirect Teen App — Premium UI v2
 
 A premium, phone-first teen support web app/PWA aimed at ages **13-17**.
 
-This is a static GitHub-ready package: upload the files, enable GitHub Pages, and it runs in the browser. It is designed to feel more mature than the Cameron/Clara style app: no childish reward chart styling, no bunnies, no carrots, no Firebase dependency.
+This version updates the original NeuroDirect teen app with the cleaner premium interface direction: controlled navy/teal/gold styling, a refined calm timer screen, a built-in light/dark mode switch, improved spacing, and a more polished bottom navigation.
 
 ## Included features
 
@@ -12,19 +12,31 @@ This is a static GitHub-ready package: upload the files, enable GitHub Pages, an
 - Planner/tasks
 - Goals and responsibility points
 - Rewards/agreements
-- Calm timer and breathing reset
+- Premium calm timer screen
+- Breathing / need-space / stop controls
 - Support request cards
 - Journal with private/shared visibility
 - PIN-protected parent area
 - Parent trend overview
 - Export/import backup JSON
-- Light/dark theme
+- Light and dark mode switch
 - Installable PWA support
 - Local-only saving using browser localStorage
 
+## v2 design upgrades
+
+- New premium UI styling matching the clean dark/light mock-up direction
+- Less visual clutter and fewer glow effects
+- Better spacing and card hierarchy
+- Inline NeuroDirect logo in the app header, so the logo does not show as broken alt text
+- Cleaner bottom navigation for mobile
+- Premium circular calm timer with progress ring
+- Light/dark mode buttons in the top bar
+- Updated service worker cache name to force a fresh GitHub Pages update
+
 ## Important privacy note
 
-This first version is **local-only**. Data stays on the device/browser where the app is used.
+This version is **local-only**. Data stays on the device/browser where the app is used.
 
 The parent PIN is a simple local app gate, not strong security or encryption. It is suitable for a basic family-support prototype, not for storing highly sensitive records.
 
@@ -62,39 +74,51 @@ UPLOAD_NOTES.md
 
 ## Upload to GitHub from your phone
 
-1. Create a new GitHub repository.
-2. Upload everything inside this folder, not the folder itself.
-3. Make sure `index.html` is at the root of the repo.
+1. Open the ZIP.
+2. Upload everything inside the folder, not the folder itself.
+3. Make sure `index.html` is at the root of the repository.
 4. Commit the files.
 5. Go to repository **Settings > Pages**.
 6. Set source to **Deploy from a branch**.
 7. Select the `main` branch and `/root` folder.
 8. Save.
-9. Open the GitHub Pages link.
+9. Wait a few minutes, then open the GitHub Pages link.
+
+## Updating an existing NeuroDirect GitHub repo
+
+Upload these files over the old ones:
+
+```text
+index.html
+style.css
+script.js
+manifest.json
+sw.js
+assets/
+README.md
+UPLOAD_NOTES.md
+.nojekyll
+```
+
+The service worker cache has been renamed to:
+
+```js
+neurodirect-teen-v2.0.0-premium
+```
+
+That helps force phones to pull the new design instead of staying stuck on the older cached version.
 
 ## Editing on your phone with Acode
 
-Edit these files mainly:
+Main files to edit:
 
 ```text
-index.html  - app shell
-style.css   - design/theme
+index.html  - app shell/header/nav
+style.css   - premium visual design/theme
 script.js   - app logic/features
 manifest.json - PWA name/icon/settings
 sw.js       - offline cache version
 ```
-
-After changing files, commit them back to GitHub.
-
-## Cache update note
-
-If you change important files and the live app seems stuck on an old version, update the cache name in `sw.js`:
-
-```js
-const CACHE_NAME = 'neurodirect-teen-v1.0.1';
-```
-
-Then commit the change and refresh the app.
 
 ## Firebase
 

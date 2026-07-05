@@ -1,4 +1,4 @@
-const CACHE_NAME = 'neurodirect-teen-v1.0.0';
+const CACHE_NAME = 'neurodirect-teen-v2.0.0-premium';
 const APP_SHELL = [
   './',
   './index.html',

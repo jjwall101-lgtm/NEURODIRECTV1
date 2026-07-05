@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#061a35" />
+  <meta name="theme-color" content="#06111f" />
   <meta name="description" content="NeuroDirect: a premium teen wellbeing, planner and parent-support app for ages 13–17." />
   <title>NeuroDirect</title>
   <link rel="manifest" href="manifest.json" />
@@ -15,16 +15,26 @@
   <div class="app-bg" aria-hidden="true"></div>
 
   <header class="topbar">
-    <div class="brand-lockup" aria-label="NeuroDirect home">
-      <img src="assets/logo.svg" alt="NeuroDirect logo" class="brand-logo" />
-      <div>
-        <p class="eyebrow">Teen support dashboard</p>
-        <h1>NeuroDirect</h1>
-      </div>
-    </div>
+    <button class="brand-lockup" data-go="today" type="button" aria-label="Go to NeuroDirect home">
+      <span class="brand-symbol" aria-hidden="true">
+        <svg viewBox="0 0 64 64" role="img" focusable="false">
+          <path d="M22 6c-7.2 0-12.4 5-12.4 12.2C4.2 20.5 1 25.6 1 32c0 7.2 4.7 12.9 11.4 15.1C14.2 53.7 19.7 58 27 58c5.1 0 9.5-2.3 12-6.2 2.5 3.9 6.9 6.2 12 6.2 7.4 0 13-4.9 14.7-11.7C71 43.7 74 38.6 74 32s-3-11.7-8.3-14.3C64 10.9 58.4 6 51 6c-5.3 0-9.8 2.5-12.2 6.6C36.1 8.5 31.2 6 25.6 6H22Z" transform="scale(.84) translate(1 0)" />
+          <path d="M32 11v42" class="mark-line" />
+          <path d="M13 32h38" class="mark-gold" />
+          <path d="M43 23l9 9-9 9" class="mark-gold" />
+          <circle cx="15" cy="22" r="4" />
+          <circle cx="18" cy="44" r="4" />
+        </svg>
+      </span>
+      <span class="brand-word">NeuroDirect</span>
+    </button>
+
     <div class="top-actions">
-      <button class="ghost-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode">Theme</button>
-      <button class="primary-btn small" data-go="checkin" type="button">Check in</button>
+      <div class="theme-switch" role="group" aria-label="Choose colour mode">
+        <button class="theme-option" data-theme-mode="light" type="button" aria-label="Light mode" title="Light mode">☼</button>
+        <button class="theme-option" data-theme-mode="dark" type="button" aria-label="Dark mode" title="Dark mode">☾</button>
+      </div>
+      <button class="primary-btn small" data-go="checkin" type="button">Check in <span aria-hidden="true">›</span></button>
     </div>
   </header>
 

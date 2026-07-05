@@ -3,7 +3,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '1.0.0';
+  const APP_VERSION = '2.0.0';
   const STORAGE_KEY = 'neurodirectTeenAppState.v1';
   const SESSION_PARENT_KEY = 'neurodirectParentUnlocked';
   const DEFAULT_PIN = '2468';
@@ -52,6 +52,7 @@
   let activeTab = 'today';
   let timer = null;
   let timerRemaining = 0;
+  let timerTotal = 300;
   let timerMode = 'Reset timer';
   let deferredInstallPrompt = null;
 
@@ -133,7 +134,20 @@
   }
 
   function applyTheme() {
-    document.documentElement.dataset.theme = state.profile.theme === 'light' ? 'light' : 'dark';
+    const theme = state.profile.theme === 'light' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = theme;
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) themeMeta.setAttribute('content', theme === 'light' ? '#f6f9fc' : '#06111f');
+    updateThemeControls();
+  }
+
+  function updateThemeControls() {
+    const theme = state.profile.theme === 'light' ? 'light' : 'dark';
+    $$('[data-theme-mode]').forEach(button => {
+      const active = button.dataset.themeMode === theme;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
   }
 
   function render() {
@@ -522,50 +536,60 @@
         <span class="pill">${state.calmSessions.length} sessions logged</span>
       `)}
 
-      <section class="grid two">
-        <article class="card">
-          <p class="eyebrow">Reset timer</p>
-          <h3>Take a short pause</h3>
-          <div class="timer-display">
-            <div>
-              <div class="breath-orb" aria-hidden="true"></div>
+      <section class="calm-layout">
+        <article class="card timer-card">
+          <div class="card-title-row">
+            <div class="card-title-lockup">
+              <svg class="line-icon" viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M25.5 5.8C16.2 5.8 7.6 12.3 6.6 22.2c6.7.3 13-2.9 16.9-9.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6.5 26.2c3-6 7.8-10.2 14.5-12.9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+              <h3>Take a short pause</h3>
+            </div>
+            <span class="info-dot" title="Use this when you need a reset before reacting.">i</span>
+          </div>
+
+          <div class="timer-display" id="timerRing" style="--timer-progress:100%">
+            <div class="timer-center">
               <strong id="timerText">05:00</strong>
               <span id="timerModeText">Reset timer</span>
             </div>
           </div>
+
+          <div class="timer-duration-row" aria-label="Timer lengths">
+            <button class="ghost-btn small" data-start-timer="2" type="button">2 min</button>
+            <button class="ghost-btn small" data-start-timer="5" type="button">5 min</button>
+            <button class="ghost-btn small" data-start-timer="10" type="button">10 min</button>
+            <button class="ghost-btn small" data-start-timer="20" type="button">20 min</button>
+          </div>
+
           <div class="timer-actions">
-            <div class="pill-row">
-              <button class="ghost-btn small" data-start-timer="2" type="button">2 min</button>
-              <button class="ghost-btn small" data-start-timer="5" type="button">5 min</button>
-              <button class="ghost-btn small" data-start-timer="10" type="button">10 min</button>
-              <button class="ghost-btn small" data-start-timer="20" type="button">20 min</button>
-            </div>
-            <div class="pill-row">
-              <button class="secondary-btn small" data-timer-mode="Breathing" type="button">Breathing</button>
-              <button class="primary-btn small" data-timer-mode="Space" type="button">Need space</button>
-              <button class="danger-btn small" data-stop-timer type="button">Stop</button>
-            </div>
+            <button class="primary-btn" data-timer-mode="Breathing" type="button">Breathing</button>
+            <button class="secondary-btn" data-timer-mode="Space" type="button">Need space</button>
+            <button class="danger-btn" data-stop-timer type="button">Stop</button>
           </div>
         </article>
 
-        <aside class="card alert-card">
-          <p class="eyebrow">Support</p>
-          <h3>I need help / space</h3>
-          <p>This creates a parent-visible support request in the app. It does not send a real phone notification in this local version.</p>
-          <div class="pill-row">
-            <button class="secondary-btn" data-support="Can we talk?" type="button">Can we talk?</button>
-            <button class="ghost-btn" data-support="Need space" type="button">Need space</button>
-            <button class="danger-btn" data-support="Need help" type="button">Need help</button>
-          </div>
-          <div class="hr"></div>
-          <p><strong>Safety note:</strong> if someone is in immediate danger, use emergency help now. This app is not an emergency service.</p>
-        </aside>
-      </section>
+        <section class="grid two compact-panels">
+          <aside class="card alert-card">
+            <p class="eyebrow">Support</p>
+            <h3>I need help / space</h3>
+            <p>This creates a parent-visible support request in the app. It does not send a real phone notification in this local version.</p>
+            <div class="pill-row">
+              <button class="secondary-btn" data-support="Can we talk?" type="button">Can we talk?</button>
+              <button class="ghost-btn" data-support="Need space" type="button">Need space</button>
+              <button class="danger-btn" data-support="Need help" type="button">Need help</button>
+            </div>
+            <div class="hr"></div>
+            <p><strong>Safety note:</strong> if someone is in immediate danger, use emergency help now. This app is not an emergency service.</p>
+          </aside>
 
-      <section class="card" style="margin-top:14px">
-        <p class="eyebrow">Grounding prompt</p>
-        <h3>5–4–3–2–1 reset</h3>
-        <p>Name 5 things you can see, 4 things you can feel, 3 things you can hear, 2 things you can smell, and 1 thing you can taste. Keep your shoulders low and breathe slowly.</p>
+          <section class="card privacy-card">
+            <p class="eyebrow">Grounding prompt</p>
+            <h3>5–4–3–2–1 reset</h3>
+            <p>Name 5 things you can see, 4 things you can feel, 3 things you can hear, 2 things you can smell, and 1 thing you can taste. Keep your shoulders low and breathe slowly.</p>
+          </section>
+        </section>
       </section>
     `;
   }
@@ -925,13 +949,19 @@
   function updateTimerDisplay() {
     const text = $('#timerText');
     const modeText = $('#timerModeText');
-    if (text) text.textContent = formatTime(timerRemaining || 300);
+    const ring = $('#timerRing');
+    const total = timerTotal || 300;
+    const remaining = timerRemaining || total;
+    const progress = Math.max(0, Math.min(100, (remaining / total) * 100));
+    if (text) text.textContent = formatTime(remaining);
     if (modeText) modeText.textContent = timerMode;
+    if (ring) ring.style.setProperty('--timer-progress', `${progress}%`);
   }
 
   function startTimer(minutes) {
     stopTimer(false);
-    timerRemaining = clamp(minutes, 1, 120) * 60;
+    timerTotal = clamp(minutes, 1, 120) * 60;
+    timerRemaining = timerTotal;
     updateTimerDisplay();
     timer = window.setInterval(() => {
       timerRemaining -= 1;
@@ -1019,11 +1049,19 @@
     const go = event.target.closest('[data-go]');
     if (go) return setTab(go.dataset.go);
 
+    const themeMode = event.target.closest('[data-theme-mode]');
+    if (themeMode) {
+      state.profile.theme = themeMode.dataset.themeMode === 'light' ? 'light' : 'dark';
+      saveState();
+      applyTheme();
+      return;
+    }
+
     const themeToggle = event.target.closest('#themeToggle');
     if (themeToggle) {
       state.profile.theme = state.profile.theme === 'light' ? 'dark' : 'light';
       saveState();
-      render();
+      applyTheme();
       return;
     }
 

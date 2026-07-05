@@ -1,34 +1,45 @@
-# Upload Notes
+# NeuroDirect Premium v2 Upload Notes
 
-## Quick install package
+## What to upload
 
-Upload these files to GitHub exactly as supplied.
+Upload the contents of this folder to GitHub, not the ZIP file itself.
 
-The app is static and does not need npm, Firebase, a backend, or a build step.
+Your repository root should look like this:
 
-## First things to change
+```text
+index.html
+style.css
+script.js
+manifest.json
+sw.js
+assets/
+README.md
+UPLOAD_NOTES.md
+.nojekyll
+```
 
-Inside the app:
+## Important
 
-1. Open **Parent**.
-2. Enter PIN: `2468`.
-3. Change the teen display name.
-4. Change the parent PIN.
-5. Adjust goals/rewards.
+`index.html` must be in the root of the repository.
 
-## What not to delete
+Do not place everything inside an extra folder like:
 
-Do not delete:
+```text
+NeuroDirect_Teen_App_v2_Premium/index.html
+```
 
-- `manifest.json`
-- `sw.js`
-- the `assets` folder
-- `.nojekyll`
+GitHub Pages needs it like this:
 
-These make the PWA/GitHub Pages setup behave properly.
+```text
+index.html
+```
 
-## Local-only behaviour
+## Cache refresh
 
-This version saves to the browser on the device.
+This version changes the service worker cache to:
 
-If you clear browser data, change browser, or use another phone, the app data will not follow unless you export/import a backup.
+```text
+neurodirect-teen-v2.0.0-premium
+```
+
+After uploading, open the app and refresh it. If your phone still shows the old version, close the browser tab, reopen the GitHub Pages link, and refresh once more.
